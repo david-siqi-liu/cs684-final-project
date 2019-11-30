@@ -1,15 +1,46 @@
 # CS684 Final Project
-## Topics
+## Goals
 
-| #    | Summary                                                      | Difficulty | Interest |
-| ---- | ------------------------------------------------------------ | ---------- | -------- |
-| 1    | Multi-model model fitting for planes (homographies) and rigid motions (fundamental matrices) | +++        | Mid      |
-| 2    | Compare window-based stereo, scan line stereo, and full grid stereo | +          | Low      |
-| 3    | Volumetric surface reconstruction<br /> - Visual Hull (silhouettes, automatic/semi-supervised segmentation)<br />- Photo-consistency-based reconstruction | +++        | High     |
-| 4    | Implement semi-supervised (interactive) image segmentation via graph cuts discussed in Toipic 9 using a loss (energy) combining appearance and boundary regularization models. | +++        | Low      |
-| 5    | Interactive Photomontage                                     | +          | Low      |
-| 6    | HDR imaging                                                  | ++         | High     |
-| 7    | Self-supervised single-image depth-estimation using neural-networks | +++        | Mid      |
-|      |                                                              |            |          |
-|      |                                                              |            |          |
+Train on labeled images in sketch_train.txt (#49,115) /real_train.txt (#122,563) /quickdraw_train.txt (#120,750) /infograph_train.txt (#37,087)
+
+Test on unlabeled images in clipart_test.txt (#14,814).
+
+Modifications:
+
+1. 10 labels
+
+## Models
+
+Naive, Pre-trained model, transfer learning:
+
+- ResNet-34
+- No transformations (except for resize, normalization and to tensor)
+
+Transformations:
+
+- Test: none
+- Train (one at a time)
+  - Center-crop
+  - Random-crop
+  - Horizontal flips
+  - Random rotation
+  - Horizontal shifts
+  - Vertical shifts
+  - Color Jitter
+  - RandomAffineTransformation
+
+Augmentations (adding channels)
+
+- Test: none
+- Train 
+  - Greyscale layer
+  - Horizontal gradient (canny edge detector)
+  - Vertical gradient
+
+Conditional auto-encoder?
+
+Add:
+
+- Atrous
+- Skip
 
